@@ -1,1 +1,43 @@
+mov r0,1                            // It will keep track of Ramanujan's Number
 
+.loop1:
+  mov r1,0
+  mov r2,1
+  .loop2:
+    mov r3,r2
+    add r3,r3,1
+    .loop3:
+      mov r4,1
+      mul r4,r2,r2
+      mul r4,r4,r2
+      
+      mov r5,1
+      mul r5,r3,r3
+      mul r5,r5,r3
+      
+      mov r6,0
+      add r6,r4,r5
+      
+      cmp r6,r0
+      beq .counter
+      .counter
+        add r1,r1,1
+      
+      add r3,r3,1
+      cmp r0,r5
+      bgt .loop3
+      
+    add r2,r2,1
+    cmp r0,r4
+    bgt .loop2
+    
+  add r0,r0,1
+  cmp r1,2
+  beq .found
+  bgt .loop1
+  cmp 2,r1
+  bgt .loop1
+  
+.found
+  sub r0,r0,1                         // The first and the smallest Ramanujan's Number
+  exit
